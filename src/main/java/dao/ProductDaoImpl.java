@@ -15,7 +15,7 @@ import java.util.TreeMap;
 public class ProductDaoImpl implements ProductDao{
     @Override
     public Integer save(Product product) {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Integer savedId= (Integer) session.save(product);
         session.getTransaction().commit();
@@ -24,7 +24,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public List<Product> findAll() {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Product");
         List<Product> allProducts = query.getResultList();
@@ -33,7 +33,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public Product findById(Integer id) {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Product p where p.id  = " + id);
         try {
@@ -48,7 +48,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public Map<Integer, Product> findOrderedProducts() {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("select   p.name,  p.price, p.status, sum(oi.quantity) from Product p left join OrderItem oi on oi.product.id = p.id where oi.quantity > 0 group by p.name, p.price, p.status order by sum(oi.quantity) desc ");
          List<Object[]> result =  query.getResultList();
@@ -67,7 +67,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public void delete(Product product) {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(product);
         session.getTransaction().commit();
@@ -75,7 +75,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public void deleteAll() {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("delete from Product ");
         query.executeUpdate();

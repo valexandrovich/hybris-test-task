@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.rmi.ServerException;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -17,16 +18,35 @@ public class HibernateUtil {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
     }
 
-    public static final SessionFactory sessionFactory = buildSessionFactory();
 
-    private static SessionFactory buildSessionFactory() {
+    public static boolean checkDbConnection(){
+        try {
+            HibernateUtil.getSessionFactory();
+            return true;
+        } catch (ExceptionInInitializerError ex){
+            return false;
+        }
+    }
+
+
+    public static SessionFactory getSessionFactory() {
+        if (HibernateUtil.sessionFactory == null) {
+            sessionFactory = buildSessionFactory();
+        }
+        return sessionFactory;
+
+    }
+
+    private static SessionFactory sessionFactory;
+
+    private static SessionFactory buildSessionFactory()  {
         try {
             Configuration configuration = new Configuration();
             mapEntityClasses(configuration);
             configuration.setProperties(getLocalProperties());
             return configuration.buildSessionFactory();
-        } catch (IOException e) {
-            throw new ExceptionInInitializerError("Configuration error");
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError("Database initialization error!");
         }
     }
 
@@ -38,7 +58,7 @@ public class HibernateUtil {
         return props;
     }
 
-    private static void mapEntityClasses(Configuration configuration){
+    private static void mapEntityClasses(Configuration configuration) {
         configuration.addAnnotatedClass(Product.class);
         configuration.addAnnotatedClass(OrderItem.class);
         configuration.addAnnotatedClass(Order.class);

@@ -1,12 +1,15 @@
 import service.menu.MainMenu;
-
-import java.io.IOException;
+import utils.HibernateUtil;
 
 public class App {
 
-
-    public static void main(String[] args) throws IOException {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.startMenu();
+    public static void main(String[] args) {
+        if (HibernateUtil.checkDbConnection()) {
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.startMenu();
+        } else {
+            System.out.println("Check Database Connection!");
+        }
     }
+
 }

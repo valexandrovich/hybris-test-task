@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderDaoImpl implements OrderDao{
     @Override
     public Integer save(Order order) {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Integer savedId= (Integer) session.save(order);
         session.getTransaction().commit();
@@ -20,7 +20,7 @@ public class OrderDaoImpl implements OrderDao{
 
     @Override
     public List<Order> findAll() {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Order ");
         List<Order> allOrders = query.getResultList();
@@ -29,7 +29,7 @@ public class OrderDaoImpl implements OrderDao{
 
     @Override
     public Order findById(Integer id) {
-        Session session = HibernateUtil.sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Order o where o.id  = " + id);
         Order order = (Order) query.getSingleResult();

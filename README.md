@@ -3,7 +3,10 @@
 
 ## Installing and running via Windows Terminal
 
-*maven required*
+*Requirements:*
+* JDK 8+
+* Maven
+* MySQL
 
 1. Download source code to you computer
 ```
