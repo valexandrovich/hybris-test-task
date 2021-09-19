@@ -22,14 +22,15 @@ public class ProductService {
         return productDao.findById(id);
     }
 
-    public Map<Integer, Product> getOrderedProducts(){
+    public Map<Integer, Product> getOrderedProducts() {
         return productDao.findOrderedProducts();
     }
 
-    public void delete(Product product){
+    public void delete(Product product) {
         productDao.delete(product);
     }
-    public void deleteAll(){
+
+    public void deleteAll() {
         productDao.deleteAll();
     }
 }

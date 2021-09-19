@@ -3,9 +3,7 @@ package model.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -18,8 +16,5 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private Date createAt;
-//    @Transient
-//    private List<OrderItem> orderItems = new ArrayList<>();
-
 }
 

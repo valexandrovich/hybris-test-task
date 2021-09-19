@@ -2,17 +2,14 @@ package service.menu;
 
 import lombok.Data;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.awt.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 @Data
 public abstract class AbstractMenu {
-    private  String menuHeader;
-    private  String menuBody;
-    private  List<String> menuItems;
+    private String menuHeader;
+    private String menuBody;
+    private List<String> menuItems;
 
     public abstract void startMenu();
 
@@ -46,8 +43,8 @@ public abstract class AbstractMenu {
         System.out.println("--------------------------------------------------");
     }
 
-    void printMenuBody(){
-        if(this.menuBody == null) return;
+    void printMenuBody() {
+        if (this.menuBody == null) return;
         System.out.println(this.menuBody);
     }
 

@@ -1,19 +1,18 @@
 package dao;
 
 import model.domain.OrderItem;
-import model.domain.Product;
 import org.hibernate.Session;
 import utils.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
 
-public class OrderItemDaoImpl implements OrderItemDao{
+public class OrderItemDaoImpl implements OrderItemDao {
     @Override
     public Integer save(OrderItem orderItem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Integer savedId= (Integer) session.save(orderItem);
+        Integer savedId = (Integer) session.save(orderItem);
         session.getTransaction().commit();
         return savedId;
     }
@@ -22,8 +21,8 @@ public class OrderItemDaoImpl implements OrderItemDao{
     public void save(List<OrderItem> orderItems) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        for (OrderItem orderItem : orderItems){
-            Integer savedId= (Integer) session.save(orderItem);
+        for (OrderItem orderItem : orderItems) {
+            Integer savedId = (Integer) session.save(orderItem);
         }
         session.getTransaction().commit();
     }

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class OrderMenu extends AbstractMenu{
+public class OrderMenu extends AbstractMenu {
 
     OrderItemService orderItemService = new OrderItemService();
     OrderPrinter orderPrinter = new OrderPrinter();
@@ -23,19 +23,19 @@ public class OrderMenu extends AbstractMenu{
         while (userChoice != 4) {
             printMenu();
             userChoice = getUserChoice();
-            switch (userChoice){
+            switch (userChoice) {
                 case 1:
                     createOrderMenu.startMenu();
-                    setMenuBody(orderPrinter.printOrders( orderItemService.getAllOrderItems()));
+                    setMenuBody(orderPrinter.printOrders(orderItemService.getAllOrderItems()));
                     break;
                 case 2:
                     orderItemUpdateForm.updateOrderItem();
-                    setMenuBody(orderPrinter.printOrders( orderItemService.getAllOrderItems()));
+                    setMenuBody(orderPrinter.printOrders(orderItemService.getAllOrderItems()));
                     break;
                 case 3:
                     Integer orderId = promptOrderId();
                     List<OrderItem> orderItems = orderItemService.findByOrderId(orderId);
-                    if (orderItems.size()<1){
+                    if (orderItems.size() < 1) {
                         System.out.println("No order on this ID! Try again");
                         userChoice = -1;
                     } else {
@@ -46,11 +46,9 @@ public class OrderMenu extends AbstractMenu{
                     return;
             }
         }
-
-
     }
 
-    private Integer promptOrderId(){
+    private Integer promptOrderId() {
         Scanner in = new Scanner(System.in);
         String userInput = "";
         Integer orderId = -1;
@@ -68,16 +66,14 @@ public class OrderMenu extends AbstractMenu{
 
     @Override
     void initialize() {
-
-        List<OrderItem> orderItems =  orderItemService.getAllOrderItems();
+        List<OrderItem> orderItems = orderItemService.getAllOrderItems();
         setMenuBody(orderPrinter.printOrders(orderItems));
-
         setMenuHeader(null);
         List<String> mainMenuItems = Arrays.asList(
-                "Create order", //1
-                "Update order", //2
-                "Find order by ID", //3
-                "Back to Main menu" //4
+                "Create order",
+                "Update order",
+                "Find order by ID",
+                "Back to Main menu"
         );
         setMenuItems(mainMenuItems);
     }

@@ -18,6 +18,4 @@ public class Product {
     private ProductStatus status;
     @Column(name = "created_at")
     private Date createdAt;
-//    @OneToMany(mappedBy = "product")
-//    private List<OrderItem> orderItems;
 }

@@ -8,38 +8,35 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.rmi.ServerException;
 import java.util.Properties;
 import java.util.logging.Level;
 
 public class HibernateUtil {
+
+    private static SessionFactory sessionFactory;
 
     static {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
     }
 
 
-    public static boolean checkDbConnection(){
+    public static boolean checkDbConnection() {
         try {
             HibernateUtil.getSessionFactory();
             return true;
-        } catch (ExceptionInInitializerError ex){
+        } catch (ExceptionInInitializerError ex) {
             return false;
         }
     }
-
 
     public static SessionFactory getSessionFactory() {
         if (HibernateUtil.sessionFactory == null) {
             sessionFactory = buildSessionFactory();
         }
         return sessionFactory;
-
     }
 
-    private static SessionFactory sessionFactory;
-
-    private static SessionFactory buildSessionFactory()  {
+    private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration();
             mapEntityClasses(configuration);

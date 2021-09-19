@@ -1,12 +1,8 @@
 package service.form;
 
 import model.domain.OrderItem;
-import model.domain.Product;
-import model.domain.ProductStatus;
 import service.OrderItemService;
-import service.ProductService;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class OrderItemUpdateForm {
@@ -16,7 +12,7 @@ public class OrderItemUpdateForm {
 
     public void updateOrderItem() {
         orderItem = orderItemService.findById(promptOrderItemId());
-        if (orderItem != null){
+        if (orderItem != null) {
             Integer quantity = promptQuantity();
             orderItem.setQuantity(quantity);
             orderItemService.updateOrderItem(orderItem);
@@ -28,12 +24,12 @@ public class OrderItemUpdateForm {
     public Integer promptOrderItemId() {
         String userInput = "";
         Integer orderItemId = -1;
-        while (orderItemId<1) {
+        while (orderItemId < 1) {
             System.out.print("Enter order item ID: ");
             userInput = in.nextLine();
             try {
                 orderItemId = Integer.parseInt(userInput);
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 orderItemId = -1;
             }
         }

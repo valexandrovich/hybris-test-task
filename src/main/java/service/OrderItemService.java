@@ -24,11 +24,11 @@ public class OrderItemService {
         return orderItemDao.findById(id);
     }
 
-    public List<OrderItem> findByOrderId(Integer id){
+    public List<OrderItem> findByOrderId(Integer id) {
         return orderItemDao.findByOrderId(id);
     }
 
-    public void updateOrderItem(OrderItem orderItem){
+    public void updateOrderItem(OrderItem orderItem) {
         orderItemDao.update(orderItem);
     }
 }

@@ -3,7 +3,6 @@ package service.menu;
 import model.domain.Order;
 import model.domain.OrderItem;
 import model.domain.OrderStatus;
-import model.domain.ProductStatus;
 import service.OrderItemService;
 import service.OrderService;
 import service.form.AddOrderItemForm;
@@ -17,7 +16,6 @@ public class CreateOrderMenu extends AbstractMenu {
     AddOrderItemForm addOrderItemForm = new AddOrderItemForm();
     OrderItemsPrinter orderItemsPrinter = new OrderItemsPrinter();
     List<OrderItem> orderItems = new ArrayList<>();
-    OrderService orderService = new OrderService();
     OrderItemService orderItemService = new OrderItemService();
     AtomicInteger userIdGenerator = new AtomicInteger();
 
@@ -26,7 +24,7 @@ public class CreateOrderMenu extends AbstractMenu {
         initialize();
         Order order = new Order();
         Integer userChoice = -1;
-        while (userChoice != 8){
+        while (userChoice != 8) {
             printMenu();
             userChoice = getUserChoice();
             switch (userChoice){
@@ -37,7 +35,6 @@ public class CreateOrderMenu extends AbstractMenu {
                     break;
                 case 2:
                     if (orderItems.size()>0){
-
                         order.setCreateAt(new Date());
                         order.setStatus(promptOrderStatus());
                         System.out.println("Saving ... ");

@@ -1,6 +1,5 @@
 package utils;
 
-import model.domain.Order;
 import model.domain.OrderItem;
 
 import java.text.SimpleDateFormat;
@@ -14,14 +13,10 @@ public class OrderPrinter {
     private final int QUANTITY_WIDTH = 15;
     private final int ORDER_CREATED_DATE_WIDTH = 16;
 
-
     SimpleDateFormat shortDate = new SimpleDateFormat("yyyy-mm-dd HH:mm");
 
-
-    private final int total_width =
-            ORDER_ID_WIDTH + ORDER_ITEM_ID_WIDTH + PRODUCTS_PRICE_WIDTH + PRODUCT_NAME_WIDTH
-                    + QUANTITY_WIDTH + ORDER_CREATED_DATE_WIDTH + 16 //swipe
-            ;
+    private final int total_width = ORDER_ID_WIDTH + ORDER_ITEM_ID_WIDTH + PRODUCTS_PRICE_WIDTH
+            + PRODUCT_NAME_WIDTH + QUANTITY_WIDTH + ORDER_CREATED_DATE_WIDTH + 16;
 
     public String printOrders(List<OrderItem> orderItems) {
         StringBuilder sb = new StringBuilder();
@@ -35,14 +30,11 @@ public class OrderPrinter {
     public String buildHeader() {
         StringBuilder row = new StringBuilder();
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         String header = "ORDERS";
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " "));
         row.append(header);
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " ") + "\n");
-
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         row.append("| ");
         row.append(compactString("ORDER ID", ORDER_ID_WIDTH));
         row.append(" | ");
@@ -57,7 +49,6 @@ public class OrderPrinter {
         row.append(compactString("CREATED", ORDER_CREATED_DATE_WIDTH));
         row.append(" | ");
         row.append("\n" + new String(new char[total_width]).replace("\0", "-") + "\n");
-
         return row.toString();
     }
 

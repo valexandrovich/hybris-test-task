@@ -2,8 +2,6 @@ package utils;
 
 import model.domain.Product;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Map;
 
 public class OrderedProductPrinter {
@@ -13,16 +11,14 @@ public class OrderedProductPrinter {
     private final int STATUS_WIDTH = 15;
     private final int QUANTITY_WIDTH = 8;
 
-    private final int total_width =
-            NAME_WIDTH + PRICE_WIDTH + STATUS_WIDTH + QUANTITY_WIDTH +  16 //swipe
-            ;
+    private final int total_width = NAME_WIDTH + PRICE_WIDTH + STATUS_WIDTH + QUANTITY_WIDTH + 16;
 
 
     public String printProducts(Map<Integer, Product> products) {
         StringBuilder sb = new StringBuilder();
         sb.append(buildHeader());
         for (Integer key : products.keySet()) {
-            sb.append(buildProductRow( products.get(key), key ));
+            sb.append(buildProductRow(products.get(key), key));
         }
         return sb.toString();
     }
@@ -30,14 +26,11 @@ public class OrderedProductPrinter {
     private String buildHeader() {
         StringBuilder row = new StringBuilder();
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         String header = "PRODUCTS LIST";
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " "));
         row.append(header);
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " ") + "\n");
-
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         row.append("| ");
         row.append(compactString("NAME", NAME_WIDTH));
         row.append(" | ");
@@ -48,7 +41,6 @@ public class OrderedProductPrinter {
         row.append(compactString("QUANTITY", QUANTITY_WIDTH));
         row.append(" | ");
         row.append("\n" + new String(new char[total_width]).replace("\0", "-") + "\n");
-
         return row.toString();
     }
 

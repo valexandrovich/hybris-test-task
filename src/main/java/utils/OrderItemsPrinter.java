@@ -1,7 +1,6 @@
 package utils;
 
 import model.domain.OrderItem;
-import model.domain.Product;
 
 import java.util.List;
 
@@ -12,30 +11,25 @@ public class OrderItemsPrinter {
     private final int PRODUCT_PRICE_WIDTH = 15;
     private final int QUANTITY_WIDTH = 15;
 
-    private final int total_width =
-            PRODUCT_ID_WIDTH + PRODUCT_NAME_WIDTH + PRODUCT_PRICE_WIDTH + QUANTITY_WIDTH  + 16 //swipe
-            ;
+    private final int total_width = PRODUCT_ID_WIDTH + PRODUCT_NAME_WIDTH + PRODUCT_PRICE_WIDTH + QUANTITY_WIDTH + 16;
 
     public String printOrderItems(List<OrderItem> orderItems) {
         StringBuilder sb = new StringBuilder();
         sb.append(buildHeader());
-        for (OrderItem orderItem : orderItems){
+        for (OrderItem orderItem : orderItems) {
             sb.append(buildOrderItemRow(orderItem));
         }
         return sb.toString();
     }
 
-    public String buildHeader(){
+    public String buildHeader() {
         StringBuilder row = new StringBuilder();
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         String header = "PRODUCTS IN ORDER";
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " "));
         row.append(header);
-        row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " ") + "\n" );
-
+        row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " ") + "\n");
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         row.append("| ");
         row.append(compactString("PRODUCT ID", PRODUCT_ID_WIDTH));
         row.append(" | ");
@@ -46,7 +40,6 @@ public class OrderItemsPrinter {
         row.append(compactString("QUANTITY", QUANTITY_WIDTH));
         row.append(" | ");
         row.append("\n" + new String(new char[total_width]).replace("\0", "-") + "\n");
-
         return row.toString();
     }
 
@@ -67,7 +60,7 @@ public class OrderItemsPrinter {
     private String compactString(String string, int maxWidth) {
         int width = string.length();
         if (width > maxWidth) {
-            return string.substring(0, maxWidth );
+            return string.substring(0, maxWidth);
         } else {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(string);

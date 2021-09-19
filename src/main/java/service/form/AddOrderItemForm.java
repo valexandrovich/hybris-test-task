@@ -1,14 +1,13 @@
 package service.form;
 
-import model.domain.Order;
 import model.domain.OrderItem;
 import model.domain.Product;
 import service.ProductService;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class AddOrderItemForm {
+
     ProductService productService = new ProductService();
     Scanner in = new Scanner(System.in);
 
@@ -39,7 +38,7 @@ public class AddOrderItemForm {
         return productId;
     }
 
-    private Integer promptQuantity(){
+    private Integer promptQuantity() {
         String userInput = "";
         Integer quantity = -1;
         while (quantity < 1) {

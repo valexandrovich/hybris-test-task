@@ -63,10 +63,8 @@ public class ProductMenu extends AbstractMenu {
 
     @Override
     void initialize() {
-
         List<Product> products = productService.getAllProducts();
         setMenuBody(productPrinter.printProducts(products));
-
         setMenuHeader(null);
         List<String> mainMenuItems = Arrays.asList(
                 "Create product",

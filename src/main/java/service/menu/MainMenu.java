@@ -1,13 +1,10 @@
 package service.menu;
 
-import service.form.CreateProductForm;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class MainMenu extends AbstractMenu {
 
-//
     OrderMenu orderMenu = new OrderMenu();
     ProductMenu productMenu = new ProductMenu();
 
@@ -19,9 +16,6 @@ public class MainMenu extends AbstractMenu {
             printMenu();
             userChoice = getUserChoice();
             switch (userChoice) {
-//                case 1:
-//                    createOrderMenu.startMenu();
-//                    break;
                 case 1:
                     productMenu.startMenu();
                     break;
@@ -39,11 +33,9 @@ public class MainMenu extends AbstractMenu {
     public void initialize() {
         setMenuHeader("HYBRIS APP");
         List<String> mainMenuItems = Arrays.asList(
-//                "Create order",// 1
-//                "Update order",// 2
-                "Products menu",// 1
-                "Order menu",// 2
-                "Exit application"// 3
+                "Products menu",
+                "Order menu",
+                "Exit application"
         );
         setMenuItems(mainMenuItems);
     }

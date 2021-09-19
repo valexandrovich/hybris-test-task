@@ -1,9 +1,7 @@
 package utils;
 
-import com.sun.xml.bind.v2.model.core.ID;
 import model.domain.Product;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ProductPrinter {
@@ -14,7 +12,7 @@ public class ProductPrinter {
     private final int STATUS_WIDTH = 15;
 
     private final int total_width =
-            ID_WIDTH + NAME_WIDTH + PRICE_WIDTH + STATUS_WIDTH + 16; //swipe
+            ID_WIDTH + NAME_WIDTH + PRICE_WIDTH + STATUS_WIDTH + 16;
 
 
     public String printProducts(List<Product> products) {
@@ -29,14 +27,11 @@ public class ProductPrinter {
     private String buildHeader() {
         StringBuilder row = new StringBuilder();
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         String header = "PRODUCTS LIST";
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " "));
         row.append(header);
         row.append(new String(new char[total_width / 2 - header.length()]).replace("\0", " ") + "\n");
-
         row.append(new String(new char[total_width]).replace("\0", "-") + "\n");
-
         row.append("| ");
         row.append(compactString("ID", ID_WIDTH));
         row.append("| ");
@@ -47,7 +42,6 @@ public class ProductPrinter {
         row.append(compactString("STATUS", STATUS_WIDTH));
         row.append(" | ");
         row.append("\n" + new String(new char[total_width]).replace("\0", "-") + "\n");
-
         return row.toString();
     }
 
