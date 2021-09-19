@@ -1,1 +1,2 @@
-# hybris-test-task
+# HYBRIS ACADEMY
+## Technical test task
