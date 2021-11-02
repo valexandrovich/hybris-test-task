@@ -11,6 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <h1>Welcome to Hybris App</h1>
+  <a href="products">Products menu</a>
   </body>
 </html>

@@ -38,6 +38,7 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Configuration configuration = new Configuration();
             mapEntityClasses(configuration);
             configuration.setProperties(getLocalProperties());

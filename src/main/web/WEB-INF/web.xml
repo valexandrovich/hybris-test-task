@@ -3,4 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+
+    <servlet>
+        <servlet-name>products</servlet-name>
+        <servlet-class>controller.ProductsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>products</servlet-name>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
 </web-app>
