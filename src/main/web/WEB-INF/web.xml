@@ -30,4 +30,13 @@
         <servlet-name>orders</servlet-name>
         <url-pattern>/orders</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>orderItems</servlet-name>
+        <servlet-class>controller.OrderItemsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>orderItems</servlet-name>
+        <url-pattern>/orderItems</url-pattern>
+    </servlet-mapping>
 </web-app>

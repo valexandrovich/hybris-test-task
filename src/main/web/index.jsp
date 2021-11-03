@@ -28,8 +28,9 @@
 <body>
 <h1>Welcome to Hybris App</h1>
 
+<a href="products">Prod GET</a>
 
-<form action="products" method="post">
+<form action="products" method="post" style="outline: blue solid 2px">
     <input type="text" id="name" name="name" placeholder="name">
     <input type="text" id="price" name="price" placeholder="price">
     <select name="status" id="status">
@@ -40,28 +41,50 @@
     <input type="submit" value="Add product">
 </form>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Status</th>
-    </tr>
+<div class="table">
+    <div class="tr">
+        <span class="td">ID</span>
+        <span class="td">Name</span>
+        <span class="td">Price</span>
+        <span class="td">Status</span>
+        <span class="td">Delete</span>
+    </div>
     <c:forEach var="product" items="${products}">
-        <tr>
-            <th>${product.getId()}</th>
-            <th>${product.getName()}</th>
-            <th>${product.getPrice()}</th>
-            <th>${product.getStatus()}</th>
-        </tr>
+        <div class="tr">
+                <%--    <form class="tr" action="products" method="get">--%>
+            <span class="td">${product.getId()}</span>
+            <span class="td">${product.getName()}</span>
+            <span class="td">${product.getPrice()}</span>
+            <span class="td">${product.getStatus()}</span>
+            <span class="td"><a href="products?del=${product.getId()}">X</a></span>
+        </div>
     </c:forEach>
+</div>
 
-</table>
+<%--<table>--%>
+<%--    <tr>--%>
+<%--        <th>ID</th>--%>
+<%--        <th>Name</th>--%>
+<%--        <th>Price</th>--%>
+<%--        <th>Status</th>--%>
+<%--        <th>Delete product</th>--%>
+<%--    </tr>--%>
+<%--    <c:forEach var="product" items="${products}">--%>
+<%--        <tr>--%>
+<%--            <th>${product.getId()}</th>--%>
+<%--            <th>${product.getName()}</th>--%>
+<%--            <th>${product.getPrice()}</th>--%>
+<%--            <th>${product.getStatus()}</th>--%>
+<%--            <th><a href="products?del=${product.getId()}">X</a></th>--%>
+<%--        </tr>--%>
+<%--    </c:forEach>--%>
+
+<%--</table>--%>
 
 
 <hr>
 <h2>Orders</h2>
-<form action="orders" method="post">
+<form action="orders" method="post" style="outline: red solid 2px">
     <select name="status" id="status">
         <c:forEach var="status" items="${orderStatuses}">
             <option>${status}</option>
@@ -88,24 +111,23 @@
         <span class="td">Save</span>
     </div>
     <c:forEach var="orderItem" items="${orderItems}">
-            <form  class="tr" action="orders" method="post">
+        <form class="tr" action="orderItems" method="post">
                 <span class="td">
                     ${orderItem.getOrder().getId()}
                     <input type="hidden" id="orderItemId" name="orderItemId" value="${orderItem.getOrder().getId()}">
                 </span>
-                <span class="td">${orderItem.getId()}</span>
-                <span class="td">${orderItem.getProduct().getPrice() * orderItem.getQuantity()}</span>
-                <span class="td">${orderItem.getProduct().getName()}</span>
-                    <%--                <span>${orderItem.getQuantity()}</span>--%>
-                <span class="td"><input type="text" name="quantity" id="quantity"
-                                        value="${orderItem.getQuantity()}"></span>
-                <span class="td">${orderItem.getOrder().getCreateAt()}</span>
-                <span class="td"><input type="submit" value="save"></span>
-            </form>
+            <span class="td">${orderItem.getId()}</span>
+            <span class="td">${orderItem.getProduct().getPrice() * orderItem.getQuantity()}</span>
+            <span class="td">${orderItem.getProduct().getName()}</span>
+                <%--                <span>${orderItem.getQuantity()}</span>--%>
+            <span class="td"><input type="text" name="quantity" id="quantity"
+                                    value="${orderItem.getQuantity()}"></span>
+            <span class="td">${orderItem.getOrder().getCreateAt()}</span>
+            <span class="td"><input type="submit" value="save"></span>
+        </form>
     </c:forEach>
 
 </div>
-
 
 
 </body>

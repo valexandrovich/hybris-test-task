@@ -22,13 +22,27 @@ public class IndexController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> products =productService.getAllProducts();
+        refreshIndexPage(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        refreshIndexPage(req, resp);
+    }
+
+    private void refreshIndexPage(HttpServletRequest req, HttpServletResponse resp) {
+        List<Product> products = productService.getAllProducts();
         List<OrderItem> orderItems = orderItemService.getAllOrderItems();
         req.setAttribute("products", products);
         req.setAttribute("orderItems", orderItems);
         req.setAttribute("orderStatuses", Arrays.asList(OrderStatus.values()));
         req.setAttribute("productStatuses", Arrays.asList(ProductStatus.values()));
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
-
+        try {
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
