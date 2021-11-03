@@ -13,10 +13,17 @@
     <title>Title</title>
 </head>
 <body>
-  <h2>Products menu</h2>
+  <h2>Products</h2>
+
+  <form action="/products.jsp" method="post">
+
+  </form>
 
     <c:forEach var="product" items="${products}">
             <p>${product}</p>
     </c:forEach>
+
+  <hr>
+
 </body>
 </html>
