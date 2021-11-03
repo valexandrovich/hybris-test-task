@@ -26,9 +26,23 @@
     <input type="submit" value="Add product">
 </form>
 
-<c:forEach var="product" items="${products}">
-    <p>${product}</p>
-</c:forEach>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Status</th>
+    </tr>
+    <c:forEach var="product" items="${products}">
+        <tr>
+            <th>${product.getId()}</th>
+            <th>${product.getName()}</th>
+            <th>${product.getPrice()}</th>
+            <th>${product.getStatus()}</th>
+        </tr>
+    </c:forEach>
+
+</table>
 
 
 <hr>
@@ -48,9 +62,30 @@
         <button type="button" onclick="removeProduct('asd')">X</button>
     </table>
 </form>
-<c:forEach var="orderItem" items="${orderItems}">
-    <p>${orderItem}</p>
-</c:forEach>
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Order Item ID</th>
+        <th>Total price</th>
+        <th>Product name</th>
+        <th>Quantity</th>
+        <th>Created</th>
+    </tr>
+    <c:forEach var="orderItem" items="${orderItems}">
+        <tr>
+            <th>${orderItem.getOrder().getId()}</th>
+            <th>${orderItem.getId()}</th>
+            <th>${orderItem.getProduct().getPrice() * orderItem.getQuantity()}</th>
+            <th>${orderItem.getProduct().getName()}</th>
+            <th>${orderItem.getQuantity()}</th>
+            <th>${orderItem.getOrder().getCreateAt()}</th>
+        </tr>
+
+    </c:forEach>
+</table>
+
+
 </body>
 <script>
     productInOrderCount = 1;
@@ -58,13 +93,13 @@
     function addProduct() {
         productInOrderCount++
         const newProductRow = document.createElement("tr");
-        newProductRow.id = "newProduct"+productInOrderCount
+        newProductRow.id = "newProduct" + productInOrderCount
         newProductRow.innerHTML = "<th>" +
             "<label for='productId'>Product ID</label>" +
             "<input type='text' id='productId' name='productId'>" +
             "<label for='quantity'>Quantity</label>" +
             "<input type='text' id='quantity' name='quantity'>" +
-            "<button type='button' onclick=removeProduct('" + "newProduct"+productInOrderCount + "')>X</button>" +
+            "<button type='button' onclick=removeProduct('" + "newProduct" + productInOrderCount + "')>X</button>" +
             "</th>"
         newProductsList = document.getElementById("orderProducts")
         newProductsList.appendChild(newProductRow)
