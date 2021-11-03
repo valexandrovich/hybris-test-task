@@ -10,6 +10,20 @@
 <html>
 <head>
     <title>$Title$</title>
+
+    <style>
+        DIV.table {
+            display: table;
+        }
+
+        FORM.tr, DIV.tr {
+            display: table-row;
+        }
+
+        SPAN.td {
+            display: table-cell;
+        }
+    </style>
 </head>
 <body>
 <h1>Welcome to Hybris App</h1>
@@ -63,27 +77,35 @@
     </table>
 </form>
 
-<table>
-    <tr>
-        <th>Order ID</th>
-        <th>Order Item ID</th>
-        <th>Total price</th>
-        <th>Product name</th>
-        <th>Quantity</th>
-        <th>Created</th>
-    </tr>
+<div class="table">
+    <div class="tr">
+        <span class="td">Order ID</span>
+        <span class="td">Order item ID</span>
+        <span class="td">Total price</span>
+        <span class="td">Product name</span>
+        <span class="td">Quantity</span>
+        <span class="td">Created</span>
+        <span class="td">Save</span>
+    </div>
     <c:forEach var="orderItem" items="${orderItems}">
-        <tr>
-            <th>${orderItem.getOrder().getId()}</th>
-            <th>${orderItem.getId()}</th>
-            <th>${orderItem.getProduct().getPrice() * orderItem.getQuantity()}</th>
-            <th>${orderItem.getProduct().getName()}</th>
-            <th>${orderItem.getQuantity()}</th>
-            <th>${orderItem.getOrder().getCreateAt()}</th>
-        </tr>
-
+            <form  class="tr" action="orders" method="post">
+                <span class="td">
+                    ${orderItem.getOrder().getId()}
+                    <input type="hidden" id="orderItemId" name="orderItemId" value="${orderItem.getOrder().getId()}">
+                </span>
+                <span class="td">${orderItem.getId()}</span>
+                <span class="td">${orderItem.getProduct().getPrice() * orderItem.getQuantity()}</span>
+                <span class="td">${orderItem.getProduct().getName()}</span>
+                    <%--                <span>${orderItem.getQuantity()}</span>--%>
+                <span class="td"><input type="text" name="quantity" id="quantity"
+                                        value="${orderItem.getQuantity()}"></span>
+                <span class="td">${orderItem.getOrder().getCreateAt()}</span>
+                <span class="td"><input type="submit" value="save"></span>
+            </form>
     </c:forEach>
-</table>
+
+</div>
+
 
 
 </body>
