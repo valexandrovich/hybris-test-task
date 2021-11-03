@@ -1,9 +1,6 @@
 package controller;
 
-import model.domain.OrderItem;
-import model.domain.OrderStatus;
-import model.domain.Product;
-import model.domain.ProductStatus;
+import model.domain.*;
 import service.OrderItemService;
 import service.ProductService;
 
@@ -17,14 +14,18 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class ProductsController extends HttpServlet {
 
     ProductService productService = new ProductService();
     OrderItemService orderItemService = new OrderItemService();
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
 
         Product product = new Product();
         product.setName(req.getParameter("name"));

@@ -13,7 +13,6 @@
 </head>
 <body>
 <h1>Welcome to Hybris App</h1>
-<a href="products">Products menu</a>
 
 
 <form action="products" method="post">
@@ -46,26 +45,7 @@
         <tr>
             <th>Products in new order</th>
         </tr>
-        <tr>
-            <th>
-                <label for="productId">Product ID</label>
-                <input type="text" id="productId" name="productId">
-                <label for="quantity">Quantity</label>
-                <input type="text" id="quantity" name="quantity">
-                <a onclick="removeProduct()" href="#">X</a>
-            </th>
-        </tr>
-        <tr>
-            <th>
-
-                <label for="productId">Product ID</label>
-                <input type="text" id="productId" name="productId">
-                <label for="quantity">Quantity</label>
-                <input type="text" id="quantity" name="quantity">
-                <a onclick="removeProduct()" href="#">X</a>
-
-            </th>
-        </tr>
+        <button type="button" onclick="removeProduct('asd')">X</button>
     </table>
 </form>
 <c:forEach var="orderItem" items="${orderItems}">
@@ -73,16 +53,25 @@
 </c:forEach>
 </body>
 <script>
+    productInOrderCount = 1;
+
     function addProduct() {
-        newProductRow = document.createElement("th")
-        newProductsList = document.getElementById("newProducts")
-
-
-        newProductsList.append(newProductRow)
+        productInOrderCount++
+        const newProductRow = document.createElement("tr");
+        newProductRow.id = "newProduct"+productInOrderCount
+        newProductRow.innerHTML = "<th>" +
+            "<label for='productId'>Product ID</label>" +
+            "<input type='text' id='productId' name='productId'>" +
+            "<label for='quantity'>Quantity</label>" +
+            "<input type='text' id='quantity' name='quantity'>" +
+            "<button type='button' onclick=removeProduct('" + "newProduct"+productInOrderCount + "')>X</button>" +
+            "</th>"
+        newProductsList = document.getElementById("orderProducts")
+        newProductsList.appendChild(newProductRow)
     }
 
-    function removeProduct() {
-        alert("remove")
+    function removeProduct(id) {
+        document.getElementById(id).remove()
     }
 </script>
 </html>

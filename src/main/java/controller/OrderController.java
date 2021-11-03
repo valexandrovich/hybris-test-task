@@ -1,10 +1,8 @@
 package controller;
 
-import model.domain.OrderItem;
-import model.domain.OrderStatus;
-import model.domain.Product;
-import model.domain.ProductStatus;
+import model.domain.*;
 import service.OrderItemService;
+import service.OrderService;
 import service.ProductService;
 
 import javax.servlet.ServletException;
@@ -13,14 +11,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class OrderController extends HttpServlet {
 
     ProductService productService = new ProductService();
     OrderItemService orderItemService = new OrderItemService();
+    OrderService orderService = new OrderService();
+    Random rnd = new Random();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Order order = new Order();
+        order.setStatus(OrderStatus.valueOf(req.getParameter("status")));
+        order.setCreateAt(new Date());
+        order.setUserId(rnd.nextInt(999));
+
+        String[] productIds = req.getParameterValues("productId");
+        String[] productQuantities = req.getParameterValues("quantity");
+
+        if (productIds.length == productQuantities.length){
+            for (int i = 0; i < productIds.length; i++) {
+                OrderItem oi = new OrderItem();
+                oi.setOrder(order);
+                oi.setQuantity(Integer.valueOf(productQuantities[i]));
+                oi.setProduct(productService.getProductById(Integer.valueOf(productIds[i])));
+                orderItemService.save(oi);
+            }
+            orderService.save(order);
+        }
 
 
 
