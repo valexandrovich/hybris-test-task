@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Hybris WEB</title>
 
     <style>
         DIV.table {
@@ -28,9 +28,14 @@
 <body>
 <h1>Welcome to Hybris App</h1>
 
-<a href="products">Prod GET</a>
 
-<form action="products" method="post" style="outline: blue solid 2px">
+<form action="products" method="get">
+    <input type="text" name="password" id="password">
+    <input type="hidden" name="deleteAll" id="deleteAll" value="Y">
+    <input type="submit" value="delete all">
+</form>
+
+<form action="products" method="post" >
     <input type="text" id="name" name="name" placeholder="name">
     <input type="text" id="price" name="price" placeholder="price">
     <select name="status" id="status">
@@ -61,30 +66,9 @@
     </c:forEach>
 </div>
 
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <th>ID</th>--%>
-<%--        <th>Name</th>--%>
-<%--        <th>Price</th>--%>
-<%--        <th>Status</th>--%>
-<%--        <th>Delete product</th>--%>
-<%--    </tr>--%>
-<%--    <c:forEach var="product" items="${products}">--%>
-<%--        <tr>--%>
-<%--            <th>${product.getId()}</th>--%>
-<%--            <th>${product.getName()}</th>--%>
-<%--            <th>${product.getPrice()}</th>--%>
-<%--            <th>${product.getStatus()}</th>--%>
-<%--            <th><a href="products?del=${product.getId()}">X</a></th>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
-
-<%--</table>--%>
-
-
 <hr>
 <h2>Orders</h2>
-<form action="orders" method="post" style="outline: red solid 2px">
+<form action="orders" method="post" >
     <select name="status" id="status">
         <c:forEach var="status" items="${orderStatuses}">
             <option>${status}</option>
@@ -113,8 +97,8 @@
     <c:forEach var="orderItem" items="${orderItems}">
         <form class="tr" action="orderItems" method="post">
                 <span class="td">
-                    ${orderItem.getOrder().getId()}
-                    <input type="hidden" id="orderItemId" name="orderItemId" value="${orderItem.getOrder().getId()}">
+                    ${orderItem.getId()}
+                    <input type="hidden" id="orderItemId" name="orderItemId" value="${orderItem.getId()}">
                 </span>
             <span class="td">${orderItem.getId()}</span>
             <span class="td">${orderItem.getProduct().getPrice() * orderItem.getQuantity()}</span>
