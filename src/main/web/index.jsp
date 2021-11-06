@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-<h1>Welcome to Hybris App</h1>
+<h1>Welcome to Hybris com.valexa.App</h1>
 
 
 <form action="products" method="get">
