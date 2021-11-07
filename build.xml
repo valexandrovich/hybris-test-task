@@ -1,0 +1,13 @@
+<project name="hybris"  basedir=".">
+    <property name="dist.dir" value="target" />
+    <property name="tomcat.home" value="/opt/homebrew/Cellar/tomcat@9/9.0.54/libexec" />
+    <property name="deploy.dir" value="${tomcat.home}/webapps" />
+    <property name="website.name" value="hybris.war" />
+    <property name="websitedir.name" value="hybris" />
+    <target name="copywar" depends="">
+        <delete dir="${deploy.dir}/${websitedir.name}" />
+        <delete file="${deploy.dir}/${website.name}" />
+        <echo message="Deleted directory and War" />
+        <copy file="${dist.dir}/${website.name}" todir="${deploy.dir}" />
+    </target>
+</project>
