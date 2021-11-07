@@ -14,58 +14,43 @@
         <param-value>/WEB-INF/spring-app.xml</param-value>
     </context-param>
 
-<!--    <servlet>-->
-<!--        <servlet-name>dispatcher</servlet-name>-->
-<!--        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
-<!--        <init-param>-->
-<!--            <param-name>contextConfigLocation</param-name>-->
-<!--            <param-value>/WEB-INF/spring-app.xml</param-value>-->
-<!--        </init-param>-->
-<!--        <load-on-startup>1</load-on-startup>-->
-<!--    </servlet>-->
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>dispatcher</servlet-name>-->
-<!--        <url-pattern>/</url-pattern>-->
-<!--    </servlet-mapping>-->
-
-
     <servlet>
-        <servlet-name>index</servlet-name>
-        <servlet-class>com.valexa.controller.IndexController</servlet-class>
+        <display-name>IndexController</display-name>
+        <servlet-name>indexController</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>index</servlet-name>
+        <servlet-name>indexController</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>products</servlet-name>
-        <servlet-class>com.valexa.controller.ProductsController</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/ </param-value>
-        </init-param>
+        <display-name>ProductsController</display-name>
+        <servlet-name>productsController</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>products</servlet-name>
+        <servlet-name>productsController</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>orders</servlet-name>
-        <servlet-class>com.valexa.controller.OrderController</servlet-class>
+        <display-name>OrdersController</display-name>
+        <servlet-name>ordersController</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>orders</servlet-name>
+        <servlet-name>ordersController</servlet-name>
         <url-pattern>/orders</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>orderItems</servlet-name>
-        <servlet-class>com.valexa.controller.OrderItemsController</servlet-class>
+        <display-name>OrderItemsController</display-name>
+        <servlet-name>orderItemsController</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>orderItems</servlet-name>
+        <servlet-name>orderItemsController</servlet-name>
         <url-pattern>/orderItems</url-pattern>
     </servlet-mapping>
 </web-app>

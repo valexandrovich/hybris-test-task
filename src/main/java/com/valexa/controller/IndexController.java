@@ -1,42 +1,27 @@
 package com.valexa.controller;
 
 import com.valexa.dao.OrderItemDao;
-import com.valexa.dao.OrderItemDaoImpl;
 import com.valexa.dao.ProductDao;
-import com.valexa.dao.ProductDaoImpl;
 import com.valexa.model.OrderItem;
 import com.valexa.model.OrderStatus;
 import com.valexa.model.Product;
 import com.valexa.model.ProductStatus;
 import lombok.Setter;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.HttpRequestHandler;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class IndexController extends HttpServlet {
+public class IndexController implements HttpRequestHandler {
 
     @Setter
-    ProductDao productDao; //= new ProductDaoImpl();
-//    ProductDao productDao = (ProductDao) new ClassPathXmlApplicationContext("classpath:WEB-INF/spring-app.xml").getBean("productDao");
-    OrderItemDao orderItemDao = new OrderItemDaoImpl();
-
-
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        refreshIndexPage(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        refreshIndexPage(req, resp);
-    }
+    ProductDao productDao;
+    @Setter
+    OrderItemDao orderItemDao;
 
     private void refreshIndexPage(HttpServletRequest req, HttpServletResponse resp) {
         List<Product> products = productDao.findAll();
@@ -52,5 +37,10 @@ public class IndexController extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        refreshIndexPage(httpServletRequest, httpServletResponse);
     }
 }

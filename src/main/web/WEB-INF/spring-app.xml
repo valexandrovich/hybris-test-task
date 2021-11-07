@@ -10,9 +10,26 @@
 
 
     <bean id="productDao" class="com.valexa.dao.ProductDaoImpl" />
+    <bean id="orderDao" class="com.valexa.dao.OrderDaoImpl" />
+    <bean id="orderItemDao" class="com.valexa.dao.OrderItemDaoImpl" />
 
     <bean id="indexController" class="com.valexa.controller.IndexController">
         <property name="productDao" ref="productDao"/>
+        <property name="orderItemDao" ref="orderItemDao"/>
+    </bean>
+
+    <bean id="productsController" class="com.valexa.controller.ProductsController">
+        <property name="productDao" ref="productDao"/>
+    </bean>
+
+    <bean id="ordersController" class="com.valexa.controller.OrderController">
+        <property name="productDao" ref="productDao"/>
+        <property name="orderDao" ref="orderDao"/>
+        <property name="orderItemDao" ref="orderItemDao"/>
+    </bean>
+
+    <bean id="orderItemsController" class="com.valexa.controller.OrderItemsController">
+        <property name="orderItemDao" ref="orderItemDao"/>
     </bean>
 
 </beans>

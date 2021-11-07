@@ -1,15 +1,12 @@
 package com.valexa.controller;
 
 import com.valexa.dao.ProductDao;
-import com.valexa.dao.ProductDaoImpl;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import com.valexa.model.Product;
 import com.valexa.model.ProductStatus;
+import lombok.Setter;
+import org.springframework.web.HttpRequestHandler;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,14 +14,23 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.Properties;
 
-public class ProductsController extends HttpServlet {
+public class ProductsController implements HttpRequestHandler {
 
-    ProductDao productDao = new ProductDaoImpl() ;
+    @Override
+    public void handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        if (httpServletRequest.getMethod().equalsIgnoreCase("GET")){
+                doGet(httpServletRequest, httpServletResponse);
+        } else {
+            doPost(httpServletRequest, httpServletResponse);
+        }
+    }
+
+    @Setter
+    ProductDao productDao;// = new ProductDaoImpl() ;
     ClassLoader loader = Thread.currentThread().getContextClassLoader();
     Properties props = new Properties();
     InputStream resourceStream = loader.getResourceAsStream("local.properties");
 
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("del") != null) {
             int delId = Integer.parseInt(req.getParameter("del"));
@@ -39,7 +45,6 @@ public class ProductsController extends HttpServlet {
         resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/"));
     }
 
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Product product = new Product();
         product.setName(req.getParameter("name"));
